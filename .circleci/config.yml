@@ -14,12 +14,12 @@ jobs:
           command: HUGO_ENV=production hugo -v -s ~/project/
       - run:
           name: "Test Website"
-          command: htmlproofer ~/project/public --allow-hash-ref --check-html --empty-alt-ignore
+          command: htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
       - add_ssh_keys
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
-              rsync -va --delete public/ staticweb@example.com:/var/www/
+              echo 'motorox.hostmysite.ro ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAlxel1px4z4+xfSRpV2PSlLDPF+Ld6jtwLUp5J70d5s+hfm2q5am1zjId/EbQqA7RucmhTeXSMDmX3E3VWi8zb/5djXdur2Yzl/bZlKPLomisLH20YSSRxm5im8VbwPJ2XkPX8wLRwzgid5Ke5BX0p7lPlj/+xufNNK1gyLubQSDukWPRswyr8nwTFDizrIbIJpxhetVQD7XR4JUwCDIziCwkO86bGk3O1YWSXjHPvemXttk55nu9qzWTsnNSunWO9QTvdyLHZgy2L1GMTF5oulJmJ3J4HMjzg4n/WKFKGNJWo7Y8O/L9fc87Yms/NYT/6RH52BLNEBr7t+hJC+kHnQ==' >> ~/.ssh/known_hosts
+              rsync -va --delete public/ motorox@motorox.hostmysite.ro:/home/motorox/motorox.hostmysite.ro/ftpmtx/webix/
             fi
 
