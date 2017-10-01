@@ -7,16 +7,19 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Get template"
+          command: git clone https://github.com/motorox/mtx-hugo-theme.git ~/project/themes/mtx-hugo-theme
+      - run:
           name: "Run Hugo"
-          command: HUGO_ENV=production hugo -v -s ~/project/src/
+          command: HUGO_ENV=production hugo -v -s ~/project/
       - run:
           name: "Test Website"
-          command: htmlproofer ~/project/src/public --allow-hash-ref --check-html --empty-alt-ignore
+          command: htmlproofer ~/project/public --allow-hash-ref --check-html --empty-alt-ignore
       - add_ssh_keys
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
-              rsync -va --delete src/public/ staticweb@example.com:/var/www/
+              rsync -va --delete public/ staticweb@example.com:/var/www/
             fi
 
