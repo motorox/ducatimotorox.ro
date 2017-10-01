@@ -8,18 +8,18 @@ jobs:
       - checkout
       - run:
           name: "Get template"
-          command: git clone https://github.com/motorox/mtx-hugo-theme.git ~/project/src/themes/mtx-hugo-theme
+          command: git submodule update
       - run:
           name: "Run Hugo"
           command: HUGO_ENV=production hugo -v -s ~/project/src
-          #      - run:
-          #          name: "Test Website"
-          #          command: htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
+      - run:
+          name: "Test Website"
+          command: htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
       - add_ssh_keys
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'motorox.hostmysite.ro ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAlxel1px4z4+xfSRpV2PSlLDPF+Ld6jtwLUp5J70d5s+hfm2q5am1zjId/EbQqA7RucmhTeXSMDmX3E3VWi8zb/5djXdur2Yzl/bZlKPLomisLH20YSSRxm5im8VbwPJ2XkPX8wLRwzgid5Ke5BX0p7lPlj/+xufNNK1gyLubQSDukWPRswyr8nwTFDizrIbIJpxhetVQD7XR4JUwCDIziCwkO86bGk3O1YWSXjHPvemXttk55nu9qzWTsnNSunWO9QTvdyLHZgy2L1GMTF5oulJmJ3J4HMjzg4n/WKFKGNJWo7Y8O/L9fc87Yms/NYT/6RH52BLNEBr7t+hJC+kHnQ==' >> ~/.ssh/known_hosts
-              rsync -va --delete public/ motorox@motorox.hostmysite.ro:/home/motorox/motorox.hostmysite.ro/ftpmtx/webix/
-            fi
+        #      - deploy:
+        #          command: |
+        #            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+        #              echo 'motorox.hostmysite.ro ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAlxel1px4z4+xfSRpV2PSlLDPF+Ld6jtwLUp5J70d5s+hfm2q5am1zjId/EbQqA7RucmhTeXSMDmX3E3VWi8zb/5djXdur2Yzl/bZlKPLomisLH20YSSRxm5im8VbwPJ2XkPX8wLRwzgid5Ke5BX0p7lPlj/+xufNNK1gyLubQSDukWPRswyr8nwTFDizrIbIJpxhetVQD7XR4JUwCDIziCwkO86bGk3O1YWSXjHPvemXttk55nu9qzWTsnNSunWO9QTvdyLHZgy2L1GMTF5oulJmJ3J4HMjzg4n/WKFKGNJWo7Y8O/L9fc87Yms/NYT/6RH52BLNEBr7t+hJC+kHnQ==' >> ~/.ssh/known_hosts
+        #              rsync -va --delete public/ motorox@motorox.hostmysite.ro:/home/motorox/motorox.hostmysite.ro/ftpmtx/webix/
+        #            fi
 
