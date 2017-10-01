@@ -8,10 +8,10 @@ jobs:
       - checkout
       - run:
           name: "Get template"
-          command: git clone https://github.com/motorox/mtx-hugo-theme.git ~/project/themes/mtx-hugo-theme
+          command: git clone https://github.com/motorox/mtx-hugo-theme.git ~/project/src/themes/mtx-hugo-theme
       - run:
           name: "Run Hugo"
-          command: HUGO_ENV=production hugo -v -s ~/project/
+          command: HUGO_ENV=production hugo -v -s ~/project/src
           #      - run:
           #          name: "Test Website"
           #          command: htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
