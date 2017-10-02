@@ -5,7 +5,10 @@ jobs:
       - image: felicianotech/docker-hugo:latest
     working_directory: ~/project
     steps:
-      - checkout
+      - checkout:
+          post:
+            - git submodule sync
+            - git submodule update --init
       - run:
           name: "Get template"
           command: git submodule update
