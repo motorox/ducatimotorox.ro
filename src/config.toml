@@ -1,4 +1,4 @@
-baseurl = "https://ducatimotorox.ro"
+baseurl = "https://ducatimotorox.ro/"
 title = "DUCATI Motorox"
 theme = "mtx-hugo-theme"
 languageCode = "en-us"
